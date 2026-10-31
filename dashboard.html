@@ -613,6 +613,8 @@
       </div>
       <div id="dataStatusMsg" style="margin-top:12px; font-size:14px; font-weight:700; color:var(--maroon)"></div>
     </div>
+    (function ()) {
+    }
   </div>
 
   <!-- ======================================================== -->
@@ -991,7 +993,128 @@
           animals_health: Math.round(pAnim),
           other: Math.round(pOther)
         };
+ 
+        // ---------------------------------------------------------
+// FETCH PREDICTIONS FROM PYTHON ML MODEL
+// ---------------------------------------------------------
 
+async function loadModelPredictions(month) {
+
+    const statusElement = document.getElementById('kpiSeasonStatus');
+
+    try {
+
+        statusElement.textContent = 'Loading ML predictions...';
+
+        const response = await fetch(
+            `${ML_API_URL}?month=${encodeURIComponent(month)}`
+        );
+
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data.predictions)) {
+            throw new Error("Invalid prediction response from backend.");
+        }
+
+        const predictionMap = new Map();
+
+        data.predictions.forEach(prediction => {
+            predictionMap.set(
+                String(prediction.ward_id),
+                prediction
+            );
+        });
+
+        // Check whether all 40 target wards have predictions
+        const missingWards = TARGET_WARD_IDS.filter(
+            id => !predictionMap.has(String(id))
+        );
+
+        if (missingWards.length > 0) {
+            throw new Error(
+                `Missing predictions for wards: ${missingWards.join(", ")}`
+            );
+        }
+
+        // Update only target wards with ML predictions
+        state.wards.forEach(ward => {
+
+            if (!ward.is_target) return;
+
+            const prediction = predictionMap.get(String(ward.id));
+
+            const counts = {};
+
+            CATEGORY_DEFS.forEach(category => {
+
+                const value = Number(
+                    prediction.counts?.[category.id]
+                );
+
+                if (!Number.isFinite(value) || value < 0) {
+                    throw new Error(
+                        `Invalid ${category.id} prediction for Ward ${ward.id}`
+                    );
+                }
+
+                counts[category.id] = Math.round(value);
+            });
+
+            const total = CATEGORY_DEFS.reduce(
+                (sum, category) => sum + counts[category.id],
+                0
+            );
+
+            ward.counts = counts;
+
+            ward.predicted_total = Number.isFinite(
+                Number(prediction.predicted_total)
+            )
+                ? Math.round(Number(prediction.predicted_total))
+                : total;
+
+            ward.staff_suggested = Math.max(
+                2,
+                Math.ceil(ward.predicted_total / 16)
+            );
+
+            ward.ml_prediction = true;
+
+        });
+
+        // Refresh existing dashboard components
+        updateKPIs();
+        renderDetailPanel();
+        renderMapMarkers();
+        renderCivicGrid();
+        renderRankingsTable();
+
+        statusElement.textContent = 'ML predictions loaded successfully';
+
+        console.log(
+            `ML predictions loaded for ${month}`,
+            data
+        );
+
+    } catch (error) {
+
+        console.error("ML prediction error:", error);
+
+        statusElement.textContent = 'ML prediction unavailable';
+
+        alert(
+            "Unable to load ML predictions.\n\n" +
+            error.message +
+            "\n\nPlease check whether the FastAPI server is running " +
+            "and the prediction data is available."
+        );
+
+    }
+}
         // Confidence & Uncertainty spread
         let spread = w.is_target ? 0.22 : 0.12;
         if (w.population < 30000 || w.population > 75000) spread += 0.05;
