@@ -122,6 +122,7 @@ def home():
 # ------------------------------------------------
 
 @app.get("/dashboard")
+@app.get("/dashboard.html")
 def dashboard():
 
     return FileResponse(DASHBOARD_FILE)
