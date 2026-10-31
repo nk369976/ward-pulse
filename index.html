@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ward Pulse — Civic Planning & Demand Forecasting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ground: #FFF4DC;
+      --card: #FFFBF1;
+      --ink: #2B1A12;
+      --muted: #5E4A3C;
+      --maroon: #6E1A2A;
+      --saffron: #E8731A;
+      --marigold: #F5B731;
+      --teal: #0F6B6B;
+      --line: #E8D3A8;
+      --sand: #FBE3B8;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ground);
+      color: var(--ink);
+      font-family: 'Mukta', sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    a { color: var(--maroon); text-decoration: none; }
+    a:hover { color: var(--ink); }
+    button { font-family: inherit; }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar / Navigation -->
+  <header style="max-width: 1200px; margin: 0 auto; padding: 18px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none; color: var(--ink)">
+      <svg width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="Ward Pulse logo">
+        <circle cx="22" cy="22" r="22" fill="#6E1A2A"></circle>
+        <circle cx="22" cy="18" fill="none" stroke="#F5B731" stroke-width="1.5" stroke-dasharray="2 3"></circle>
+        <path d="M7 23H15L18 13L24 32L27 23H37" fill="none" stroke="#F5B731" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span style="display:flex; flex-direction:column; line-height:1.1">
+        <span style="font-family:'Yatra One', serif; font-size:26px">Ward Pulse</span>
+        <span style="font-size:14px; color: var(--muted)">वार्ड पल्स</span>
+      </span>
+    </a>
+
+    <nav style="display:flex; flex-wrap:wrap; align-items:center; gap: 8px 24px; font-weight:600; font-size:17px">
+      <a href="#why" style="color: var(--ink); text-decoration:none; padding: 10px 0" id="nav1">Why it matters</a>
+      <a href="#how" style="color: var(--ink); text-decoration:none; padding: 10px 0" id="nav2">How it works</a>
+      <a href="#features" style="color: var(--ink); text-decoration:none; padding: 10px 0" id="nav3">Features</a>
+      <button type="button" id="btnToggleLang" style="font: inherit; font-weight:600; min-height:44px; padding: 0 16px; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; cursor:pointer">
+        हिंदी
+      </button>
+      <a href="dashboard.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: var(--maroon); color: #FFF4DC; border-radius: 999px; text-decoration: none; font-weight:700; box-shadow: 2px 2px 0 var(--marigold)" id="openDashBtn">
+        Open dashboard
+      </a>
+    </nav>
+  </header>
+
+  <!-- Toran Strip -->
+  <svg width="100%" height="30" aria-hidden="true" style="display:block">
+    <defs>
+      <pattern id="toran" width="80" height="30" patternUnits="userSpaceOnUse">
+        <path d="M0 0H40L20 26Z" fill="#E8731A"></path>
+        <path d="M40 0H80L60 26Z" fill="#F5B731"></path>
+        <circle cx="20" cy="26" r="3" fill="#6E1A2A"></circle>
+        <circle cx="60" cy="26" r="3" fill="#6E1A2A"></circle>
+      </pattern>
+    </defs>
+    <rect width="100%" height="5" fill="#6E1A2A"></rect>
+    <rect y="5" width="100%" height="25" fill="url(#toran)"></rect>
+  </svg>
+
+  <!-- Hero Section -->
+  <section style="position:relative">
+    <svg aria-hidden="true" width="100%" height="100%" style="position:absolute; inset:0; opacity:0.09; pointer-events:none">
+      <defs>
+        <pattern id="jali" width="56" height="56" patternUnits="userSpaceOnUse">
+          <path d="M28 0L56 28L28 56L0 28Z" fill="none" stroke="#6E1A2A" stroke-width="1.2"></path>
+          <circle cx="28" cy="28" r="6" fill="none" stroke="#6E1A2A" stroke-width="1.2"></circle>
+          <circle cx="0" cy="0" r="4" fill="#6E1A2A"></circle>
+          <circle cx="56" cy="0" r="4" fill="#6E1A2A"></circle>
+          <circle cx="0" cy="56" r="4" fill="#6E1A2A"></circle>
+          <circle cx="56" cy="56" r="4" fill="#6E1A2A"></circle>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#jali)"></rect>
+    </svg>
+
+    <div style="position:relative; max-width:1200px; margin:0 auto; padding: 56px 24px 72px; box-sizing:border-box; display:flex; flex-wrap:wrap; align-items:center; gap: 56px">
+      <div style="flex: 1 1 480px; min-width:0">
+        <div style="display:inline-flex; align-items:center; gap:10px; padding: 6px 16px; background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; font-weight:600; font-size:15px; color: var(--maroon)">
+          <span style="width:10px; height:10px; background: var(--saffron); border-radius:50%"></span>
+          <span id="heroEyebrow">नागरिक सेवाओं की योजना · Civic planning, ward by ward</span>
+        </div>
+
+        <h1 id="heroH1" style="font-family:'Yatra One', serif; font-weight:400; font-size: clamp(38px, 5.2vw, 66px); line-height:1.08; margin: 22px 0 14px">
+          Know a ward's <span style="color: var(--maroon)">complaint load</span> before the first complaint arrives
+        </h1>
+
+        <p id="heroTag" style="font-family:'Yatra One', serif; font-size: clamp(20px, 2.2vw, 26px); color: var(--maroon); margin: 0 0 18px">
+          शिकायत आने से पहले जानिए, हर वार्ड को कितनी सेवा चाहिए।
+        </p>
+
+        <p id="heroLead" style="font-size: 19px; color: var(--muted); max-width: 540px; margin: 0 0 32px">
+          Newly formed wards and wards with missing complaint logs are hard to plan for. Ward Pulse forecasts demand across all 198 wards of Bengaluru BBMP for 18 competition months, empowering municipal corporations to allocate field staff equitably before problems escalate.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:14px">
+          <a href="dashboard.html" id="heroCta1" style="display:inline-flex; align-items:center; min-height:54px; padding: 0 30px; background: var(--maroon); color:#FFF4DC; border-radius: 999px; font-weight:700; font-size:18px; text-decoration:none; box-shadow: 4px 4px 0 var(--marigold)">
+            See the demand map
+          </a>
+          <a href="#how" id="heroCta2" style="display:inline-flex; align-items:center; min-height:54px; padding: 0 28px; border: 2px solid var(--ink); color: var(--ink); border-radius: 999px; font-weight:700; font-size:18px; text-decoration:none">
+            How the model works
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual (Interactive Mini Ward Matrix) -->
+      <div style="flex: 1 1 420px; min-width:0; display:flex; justify-content:center">
+        <div style="position:relative; width:100%; max-width:500px">
+          <div style="background: var(--card); border: 2px solid var(--ink); border-radius: 28px; padding: 22px; box-shadow: 10px 10px 0 var(--marigold)">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px">
+              <span id="heroMapTitle" style="font-family:'Yatra One', serif; font-size:20px">BBMP Demand Forecast</span>
+              <span style="font-size:14px; color: var(--muted)">Interactive Preview</span>
+            </div>
+            
+            <div id="miniGrid" style="display:grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px">
+              <!-- Dynamically generated mini grid cells -->
+            </div>
+
+            <div style="display:flex; align-items:center; gap:10px; margin-top:16px; font-size:14px; color: var(--muted)">
+              <span>Low</span>
+              <span style="flex:1; height:12px; border-radius:6px; background: linear-gradient(90deg, #FBE3B8, #F5BE62, #E98B2E, #B9501C, #6E1A2A)"></span>
+              <span>High</span>
+            </div>
+          </div>
+
+          <!-- Floating Inspection Card -->
+          <div id="heroCard" style="position:absolute; left:-14px; bottom:-34px; width: 280px; background: #FFFBF1; border: 2px solid var(--maroon); border-radius: 20px; padding: 14px 16px; box-shadow: 0 10px 24px rgba(43,26,18,0.18)">
+            <div id="heroCardTag" style="font-size:13px; font-weight:700; color: var(--maroon); letter-spacing:0.04em">
+              WARD 5 · JAKKURU (TARGET WARD)
+            </div>
+            <div id="heroCardTotal" style="font-family:'Yatra One', serif; font-size:30px; line-height:1.15">
+              ≈ 94 <span style="font-size:15px; font-family:'Mukta', sans-serif; color: var(--muted)">complaints / mo</span>
+            </div>
+            <div id="heroCardLine" style="font-size:14px; color: var(--muted)">
+              Likely range 81 to 107 · High confidence
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complaint types Banner (6 Official Competition Categories) -->
+  <section style="background: var(--maroon); color:#FFF4DC">
+    <div style="max-width:1200px; margin:0 auto; padding: 36px 24px; box-sizing:border-box; display:flex; flex-wrap:wrap; gap: 20px 32px; align-items:center; justify-content:space-between">
+      <div style="flex: 1 1 240px; font-family:'Yatra One', serif; font-size:24px; line-height:1.2">
+        Six everyday civic categories,<br>one predictive model
+        <div style="font-family:'Mukta', sans-serif; font-size:15px; color:#F5D9A0; margin-top:4px">
+          छह नागरिक सेवा श्रेणियाँ, एक एकीकृत मॉडल
+        </div>
+      </div>
+      
+      <div style="flex: 3 1 640px; display:flex; flex-wrap:wrap; gap:10px">
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">⚡</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Electrical<div style="font-weight:400; font-size:13px; color:#F5D9A0">विद्युत</div></div>
+        </div>
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">🗑️</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Solid Waste<div style="font-weight:400; font-size:13px; color:#F5D9A0">कचरा</div></div>
+        </div>
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">🛣️</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Roads<div style="font-weight:400; font-size:13px; color:#F5D9A0">सड़क</div></div>
+        </div>
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">🌳</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Trees<div style="font-weight:400; font-size:13px; color:#F5D9A0">पेड़</div></div>
+        </div>
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">🐕</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Animals<div style="font-weight:400; font-size:13px; color:#F5D9A0">पशु स्वास्थ्य</div></div>
+        </div>
+        <div style="flex: 1 1 110px; display:flex; align-items:center; gap:8px; padding: 10px 14px; border: 1.5px solid #F5B731; border-radius:14px">
+          <span style="font-size:22px">📦</span>
+          <div style="line-height:1.2; font-weight:700; font-size:15px">Other<div style="font-weight:400; font-size:13px; color:#F5D9A0">अन्य सेवाएं</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section id="why" style="max-width:1200px; margin:0 auto; padding: 96px 24px 40px; box-sizing:border-box">
+    <div style="font-weight:700; color: var(--maroon); letter-spacing:0.06em; font-size:15px">क्यों ज़रूरी है · WHY IT MATTERS</div>
+    <h2 id="whyH2" style="font-family:'Yatra One', serif; font-weight:400; font-size: clamp(30px, 3.6vw, 44px); line-height:1.15; margin: 10px 0 36px; max-width: 760px">
+      Planning without history is guesswork
+    </h2>
+    
+    <div style="display:flex; flex-wrap:wrap; gap:24px">
+      <div style="flex: 1 1 300px; background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 4px 4px 0 var(--line)">
+        <div style="font-family:'Yatra One', serif; font-size:44px; color: var(--maroon); line-height:1">०१</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:24px; margin: 12px 0 8px">New wards</h3>
+        <p style="margin:0; color: var(--muted)">A newly formed ward has no complaint record, yet it still needs municipal field staff and budget from day one.</p>
+      </div>
+
+      <div style="flex: 1 1 300px; background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 4px 4px 0 var(--line)">
+        <div style="font-family:'Yatra One', serif; font-size:44px; color: var(--maroon); line-height:1">०२</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:24px; margin: 12px 0 8px">Missing records</h3>
+        <p style="margin:0; color: var(--muted)">Some wards never logged their historical issues, so their real demand stays invisible to municipal commissioners.</p>
+      </div>
+
+      <div style="flex: 1 1 300px; background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 4px 4px 0 var(--line)">
+        <div style="font-family:'Yatra One', serif; font-size:44px; color: var(--maroon); line-height:1">०३</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:24px; margin: 12px 0 8px">Staff and budget</h3>
+        <p style="margin:0; color: var(--muted)">City corporations handle thousands of calls. An equitable split of workers and budget requires an objective model for every ward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" style="max-width:1200px; margin:0 auto; padding: 72px 24px 40px; box-sizing:border-box">
+    <div style="font-weight:700; color: var(--maroon); letter-spacing:0.06em; font-size:15px">कैसे काम करता है · HOW IT WORKS</div>
+    <h2 id="howH2" style="font-family:'Yatra One', serif; font-weight:400; font-size: clamp(30px, 3.6vw, 44px); line-height:1.15; margin: 10px 0 40px; max-width: 760px">
+      From ward attributes to a demand map in four steps
+    </h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:28px">
+      <div style="flex: 1 1 240px">
+        <div style="width:64px; height:64px; border-radius:50%; background: var(--marigold); border: 2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:'Yatra One', serif; font-size:28px">1</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:22px; margin: 16px 0 6px">Ward attributes</h3>
+        <p style="margin:0; color: var(--muted)">The details your dataset holds for each ward, such as population, area, and type of locality.</p>
+      </div>
+      <div style="flex: 1 1 240px">
+        <div style="width:64px; height:64px; border-radius:50%; background: var(--marigold); border: 2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:'Yatra One', serif; font-size:28px">2</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:22px; margin: 16px 0 6px">Map data & location</h3>
+        <p style="margin:0; color: var(--muted)">Roads, markets, drains and the wards next door, taken from the user's location and map coordinates.</p>
+      </div>
+      <div style="flex: 1 1 240px">
+        <div style="width:64px; height:64px; border-radius:50%; background: var(--marigold); border: 2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:'Yatra One', serif; font-size:28px">3</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:22px; margin: 16px 0 6px">Regression model</h3>
+        <p style="margin:0; color: var(--muted)">Learns from wards that do have complaint records, then estimates demand for wards that do not.</p>
+      </div>
+      <div style="flex: 1 1 240px">
+        <div style="width:64px; height:64px; border-radius:50%; background: var(--marigold); border: 2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:'Yatra One', serif; font-size:28px">4</div>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:22px; margin: 16px 0 6px">Demand dashboard</h3>
+        <p style="margin:0; color: var(--muted)">A ward-by-ward map showing predicted complaints, a likely range, and suggested field staff allocation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" style="max-width:1200px; margin:0 auto; padding: 72px 24px 96px; box-sizing:border-box">
+    <div style="font-weight:700; color: var(--maroon); letter-spacing:0.06em; font-size:15px">विशेषताएँ · FEATURES</div>
+    <h2 id="featH2" style="font-family:'Yatra One', serif; font-weight:400; font-size: clamp(30px, 3.6vw, 44px); line-height:1.15; margin: 10px 0 36px; max-width: 760px">
+      More than a single number per ward
+    </h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:24px">
+      <div style="flex: 1 1 320px; background: #2B1A12; color:#FFF4DC; border-radius: 28px; padding: 32px">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:26px; margin: 14px 0 8px">Demand by complaint type</h3>
+        <p style="margin:0; color:#F5D9A0">See how much of a ward's forecast is roads, garbage, water or streetlights, so the right municipal team is dispatched.</p>
+      </div>
+      <div style="flex: 1 1 320px; background: #2B1A12; color:#FFF4DC; border-radius: 28px; padding: 32px">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"></path></svg>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:26px; margin: 14px 0 8px">Confidence for every ward</h3>
+        <p style="margin:0; color:#F5D9A0">Each estimate comes with a likely range and a High, Medium or Low label, so city planners know where to double-check.</p>
+      </div>
+      <div style="flex: 1 1 320px; background: #2B1A12; color:#FFF4DC; border-radius: 28px; padding: 32px">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="6" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="5" cy="18" r="2"></circle><circle cx="19" cy="18" r="2"></circle><path d="M10 10L6.5 7.5M14 10l3.5-2.5M10 14l-3.5 2.5M14 14l3.5 2.5"></path></svg>
+        <h3 style="font-family:'Yatra One', serif; font-weight:400; font-size:26px; margin: 14px 0 8px">Location & dataset dynamic</h3>
+        <p style="margin:0; color:#F5D9A0">Upload any city dataset (CSV/JSON) or detect your live GPS location to recalculate civic allocations instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Big Call to Action -->
+  <section style="position:relative; background: var(--maroon); color:#FFF4DC; overflow:hidden">
+    <svg aria-hidden="true" width="100%" height="100%" style="position:absolute; inset:0; opacity:0.16">
+      <defs>
+        <pattern id="jali2" width="56" height="56" patternUnits="userSpaceOnUse">
+          <path d="M28 0L56 28L28 56L0 28Z" fill="none" stroke="#F5B731" stroke-width="1.2"></path>
+          <circle cx="28" cy="28" r="6" fill="none" stroke="#F5B731" stroke-width="1.2"></circle>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#jali2)"></rect>
+    </svg>
+    <div style="position:relative; max-width:1200px; margin:0 auto; padding: 72px 24px; box-sizing:border-box; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px">
+      <div style="flex: 1 1 480px">
+        <h2 id="ctaH2" style="font-family:'Yatra One', serif; font-weight:400; font-size: clamp(30px, 3.6vw, 44px); line-height:1.15; margin:0 0 10px">
+          Plan staff and budget before the complaints begin
+        </h2>
+        <p style="margin:0; font-family:'Yatra One', serif; font-size:22px; color:#F5D9A0">
+          शिकायतें शुरू होने से पहले योजना बनाइए।
+        </p>
+      </div>
+      <a href="dashboard.html" id="ctaBtn" style="display:inline-flex; align-items:center; min-height:56px; padding: 0 34px; background: var(--marigold); color: var(--ink); border-radius: 999px; font-weight:700; font-size:19px; text-decoration:none; box-shadow: 4px 4px 0 var(--ink)">
+        Open the dashboard
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="max-width:1200px; margin:0 auto; padding: 36px 24px 48px; box-sizing:border-box; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px">
+    <div style="display:flex; align-items:center; gap:12px">
+      <svg width="36" height="36" viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="22" fill="#6E1A2A"></circle>
+        <path d="M7 23H15L18 13L24 32L27 23H37" fill="none" stroke="#F5B731" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span style="font-family:'Yatra One', serif; font-size:20px">Ward Pulse</span>
+    </div>
+    <div style="font-size:15px; color: var(--muted); max-width: 560px">
+      Predictive Civic Allocation System · Supports custom datasets and automated user location geocoding.
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      let isHindi = false;
+
+      const I18N = {
+        en: {
+          langBtn: 'हिंदी',
+          nav1: 'Why it matters',
+          nav2: 'How it works',
+          nav3: 'Features',
+          openDash: 'Open dashboard',
+          eyebrow: 'नागरिक सेवाओं की योजना · Civic planning, ward by ward',
+          h1a: "Know a ward's",
+          h1b: 'complaint load',
+          h1c: 'before the first complaint arrives',
+          tag: 'शिकायत आने से पहले जानिए, हर वार्ड को कितनी सेवा चाहिए।',
+          lead: 'New wards and wards with missing records are hard to plan for. Ward Pulse estimates how many roads, garbage, water and streetlight complaints a ward is likely to get, using its attributes, map data, and your custom location.',
+          cta1: 'See the demand map',
+          cta2: 'How the model works',
+          mapTitle: 'Predicted demand',
+          perMonth: 'complaints / month',
+          newWard: 'NEW WARD · NO HISTORY',
+          hasHist: 'HAS HISTORY',
+          ward: 'WARD',
+          range: 'Likely range',
+          to: 'to',
+          confWord: 'confidence',
+          High: 'High',
+          Medium: 'Medium',
+          Low: 'Low',
+          whyH2: 'Planning without history is guesswork',
+          howH2: 'From ward attributes to a demand map in four steps',
+          featH2: 'More than a single number per ward',
+          ctaH2: 'Plan staff and budget before the complaints begin',
+          ctaBtn: 'Open the dashboard'
+        },
+        hi: {
+          langBtn: 'English',
+          nav1: 'क्यों ज़रूरी है',
+          nav2: 'कैसे काम करता है',
+          nav3: 'विशेषताएँ',
+          openDash: 'डैशबोर्ड खोलें',
+          eyebrow: 'नागरिक सेवाओं की योजना, वार्ड दर वार्ड',
+          h1a: 'पहली शिकायत आने से पहले जानिए',
+          h1b: 'वार्ड का शिकायत-भार',
+          h1c: '',
+          tag: 'Know the load before the complaints arrive.',
+          lead: 'नए वार्ड या जिन वार्डों का रिकॉर्ड नहीं है, उनकी योजना बनाना कठिन है। Ward Pulse वार्ड की विशेषताओं और नक्शे के आँकड़ों से अनुमान लगाता है कि सड़क, कचरा, पानी और स्ट्रीटलाइट की कितनी शिकायतें आ सकती हैं।',
+          cta1: 'डिमांड मैप देखें',
+          cta2: 'मॉडल कैसे काम करता है',
+          mapTitle: 'अनुमानित माँग',
+          perMonth: 'शिकायतें / माह',
+          newWard: 'नया वार्ड · कोई इतिहास नहीं',
+          hasHist: 'इतिहास उपलब्ध',
+          ward: 'वार्ड',
+          range: 'संभावित दायरा',
+          to: 'से',
+          confWord: 'भरोसा',
+          High: 'उच्च',
+          Medium: 'मध्यम',
+          Low: 'निम्न',
+          whyH2: 'इतिहास के बिना योजना केवल अंदाज़ा है',
+          howH2: 'वार्ड की विशेषताओं से माँग के नक्शे तक, चार चरणों में',
+          featH2: 'हर वार्ड के लिए सिर्फ़ एक संख्या से ज़्यादा',
+          ctaH2: 'शिकायतें शुरू होने से पहले स्टाफ और बजट की योजना बनाइए',
+          ctaBtn: 'डैशबोर्ड खोलें'
+        }
+      };
+
+      const mask = ['..####..', '.######.', '####~###', '###~####', '.##~###.', '..##~#..'];
+      const scale = ['#FBE3B8', '#F5BE62', '#E98B2E', '#B9501C', '#6E1A2A'];
+      let selectedMiniWard = 12;
+
+      function renderLanding() {
+        const t = isHindi ? I18N.hi : I18N.en;
+
+        document.getElementById('btnToggleLang').textContent = t.langBtn;
+        document.getElementById('nav1').textContent = t.nav1;
+        document.getElementById('nav2').textContent = t.nav2;
+        document.getElementById('nav3').textContent = t.nav3;
+        document.getElementById('openDashBtn').textContent = t.openDash;
+
+        document.getElementById('heroEyebrow').textContent = t.eyebrow;
+        document.getElementById('heroH1').innerHTML = `${t.h1a} <span style="color: var(--maroon)">${t.h1b}</span> ${t.h1c}`;
+        document.getElementById('heroTag').textContent = t.tag;
+        document.getElementById('heroLead').textContent = t.lead;
+        document.getElementById('heroCta1').textContent = t.cta1;
+        document.getElementById('heroCta2').textContent = t.cta2;
+        document.getElementById('heroMapTitle').textContent = t.mapTitle;
+
+        document.getElementById('whyH2').textContent = t.whyH2;
+        document.getElementById('howH2').textContent = t.howH2;
+        document.getElementById('featH2').textContent = t.featH2;
+        document.getElementById('ctaH2').textContent = t.ctaH2;
+        document.getElementById('ctaBtn').textContent = t.ctaBtn;
+
+        // Render interactive mini grid
+        const miniGrid = document.getElementById('miniGrid');
+        miniGrid.innerHTML = '';
+        let n = 0;
+
+        mask.forEach(row => {
+          row.split('').forEach(ch => {
+            const cell = document.createElement('div');
+            cell.style.cssText = 'aspect-ratio:1; width:100%; box-sizing:border-box;';
+
+            if (ch === '#') {
+              const w = n;
+              const v = Math.abs(Math.sin((w + 1) * 12.9898) * 43758.5453) % 1;
+              const total = Math.round(150 + v * 650);
+              const spread = 0.1 + ((w * 37) % 20) / 100;
+              const level = spread < 0.2 ? 'High' : (spread < 0.28 ? 'Medium' : 'Low');
+              const noHist = w % 3 !== 0;
+
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.style.cssText = `width:100%; height:100%; padding:0; cursor:pointer; border-radius:8px; background: ${scale[Math.min(4, Math.floor(v * 5))]}; border: ${w === selectedMiniWard ? '3px solid #2B1A12' : '3px solid transparent'}`;
+              btn.title = `Ward ${w + 1}: ${total} complaints`;
+
+              btn.onclick = () => {
+                selectedMiniWard = w;
+                updateMiniCard(w, total, spread, level, noHist, t);
+                renderLanding();
+              };
+
+              cell.appendChild(btn);
+
+              if (w === selectedMiniWard) {
+                updateMiniCard(w, total, spread, level, noHist, t);
+              }
+              n++;
+            } else if (ch === '~') {
+              const river = document.createElement('div');
+              river.style.cssText = 'width:100%; height:100%; border-radius:8px; background:#BFE0DC; opacity:0.8';
+              cell.appendChild(river);
+            }
+            miniGrid.appendChild(cell);
+          });
+        });
+      }
+
+      function updateMiniCard(w, total, spread, level, noHist, t) {
+        document.getElementById('heroCardTag').textContent = `${t.ward} ${w + 1} · ${noHist ? t.newWard : t.hasHist}`;
+        document.getElementById('heroCardTotal').innerHTML = `≈ ${total} <span style="font-size:15px; font-family:'Mukta', sans-serif; color: var(--muted)">${t.perMonth}</span>`;
+        document.getElementById('heroCardLine').textContent = `${t.range} ${Math.round(total * (1 - spread))} ${t.to} ${Math.round(total * (1 + spread))} · ${t[level]} ${t.confWord}`;
+      }
+
+      document.getElementById('btnToggleLang').onclick = () => {
+        isHindi = !isHindi;
+        renderLanding();
+      };
+
+      renderLanding();
+    })();
+  </script>
+</body>
+</html>

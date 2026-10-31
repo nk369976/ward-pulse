@@ -1,0 +1,7 @@
+ward_id,month,category_group,predicted_count
+5,2024-01,electrical,10.0
+5,2024-01,solid_waste,10.0
+5,2024-01,roads,10.0
+5,2024-01,trees,10.0
+5,2024-01,animals_health,10.0
+5,2024-01,other,10.0
